@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    离线实跑 harness：不经过 PotatoVN，直接跑插件里的 DLsitePhraser，
+    拿真实 DLsite 页面/接口走一遍完整搜刮流程，把结果打印出来。
+
+    它**编译的是兄弟目录那份插件源码**，依赖也抄插件的同一套版本，
+    所以"验过的解析"就是"要装进 PotatoVN 的那份解析"，不是另写一遍。
+
+    目录前提（与 README 的编译步骤一致）：
+        App.PluginBase/            <- 官方模板仓库根
+        ├─ PotatoVN/               <- submodule，含 GalgameManager.WinApp.Base
+        └─ PotatoVN.App.DLsiteParser/
+           ├─ DLsitePhraser.cs 等
+           └─ harness/             <- 本工程
+
+    跑法（本目录下）：
+      dotnet build -c Debug -p:RuntimeIdentifiers=win-x64
+      dotnet bin\Debug\net8.0-windows10.0.22621.0\dlsite-harness.dll
+      dotnet bin\Debug\net8.0-windows10.0.22621.0\dlsite-harness.dll RJ00000001 VJ00000001
+    （最后两个是作品 id，不给就跑内置的 3 个样本。）
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>dlsite-harness</AssemblyName>
+    <RootNamespace>DLsiteHarness</RootNamespace>
+    <NoWarn>$(NoWarn);NU1902;CA1416;CS8632;MVVMTK0045</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 与插件 csproj 保持同一套：基库 + 同一个 WindowsAppSDK / AngleSharp 版本 -->
+    <ProjectReference Include="..\..\PotatoVN\GalgameManager.WinApp.Base\GalgameManager.WinApp.Base.csproj" />
+    <PackageReference Include="AngleSharp" Version="1.8.2" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 插件源码本身（单一真相来源，就在上一级） -->
+    <Compile Include="..\DLsitePhraser.cs" />
+    <Compile Include="..\DLsiteWork.cs" />
+    <Compile Include="..\Plugin.cs" />
+  </ItemGroup>
+
+</Project>
