@@ -57,6 +57,9 @@ public class Plugin : IPlugin, IParserProvider
     {
         HostApi = hostApi;
 
+        // 设置页的「搜索」按钮：PotatoVN 只给内置源配了搜索链接，插件源需要自己补上（见 SearchLinkPatch）
+        SearchLinkPatch.Install(hostApi);
+
         // 说明：IPotatoVnApi 并没有暴露 HttpClient 给插件（只有 DownloadImageAsync 可传 null 用宿主的默认客户端）。
         // DLsite 抓取需要自定义 UA 与年龄确认 Cookie，所以搜刮器自己持有一个 HttpClient。
         // 插件也不应该自己往宿主 UI 上乱弹窗，出错走 hostApi.Log / DeveloperEvent。

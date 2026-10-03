@@ -11,8 +11,8 @@
     <EnableCoreFrameworkTracking>false</EnableCoreFrameworkTracking>
     <!-- 命名规则 A{GUID}，GUID 必须与 Plugin.cs 里 PluginInfo.Id 一致 -->
     <AssemblyName>A8738f51b-0217-49d1-a3a4-50e9411feb48</AssemblyName>
-    <!-- 打包版本：归档目录名与之对应（artifacts\3.3\） -->
-    <Version>3.3.0</Version>
+    <!-- 打包版本：归档目录名与之对应（artifacts\3.3.1\） -->
+    <Version>3.3.1</Version>
     <!-- 发布版别把开发者本机源码路径写进 dll/pdb：把工程根映射成 `.`（Debug 保留原样，方便调试） -->
     <PathMap Condition="'$(Configuration)'=='Release'">$(MSBuildProjectDirectory)=.</PathMap>
     <!-- 要处理该警告需要用到 .NET Preview 特性，等稳定后再处理 -->
@@ -138,6 +138,8 @@ StampedFiles = stampedFiles.ToArray();
   <ItemGroup>
     <!-- HTML 解析（当 JSON 接口不可用时的回退方案） -->
     <PackageReference Include="AngleSharp" Version="1.8.2" />
+    <!-- Harmony：PotatoVN 自带 0Harmony.dll，插件只做编译期引用、不进包（见 PackPlugin 黑名单） -->
+    <PackageReference Include="Lib.Harmony" Version="2.4.2" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4948">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

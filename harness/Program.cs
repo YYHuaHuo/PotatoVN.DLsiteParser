@@ -42,6 +42,12 @@ internal static class Program
             return await SearchByNameAsync(args[1], args.Length > 2 ? args[2] : args[1]);
         }
 
+        // 搜索链接补丁模式：纯离线，用同形状假 ViewModel 验「选中本插件时跳到 DLsite」
+        if (args.Length > 0 && args[0] == "--searchlink")
+        {
+            return SearchLinkCheck.Run();
+        }
+
         // 搜索词变体模式：纯离线，验「长标题怎么截」（DLsite fsr 搜索要求所有分词都命中的坑）
         if (args.Length > 0 && args[0] == "--keywords")
         {

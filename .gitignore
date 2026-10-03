@@ -12,3 +12,8 @@ artifacts/
 # 系统
 Thumbs.db
 Desktop.ini
+
+# 本地材料（不进仓库）
+/图标/
+/自检报告.md
+/上传说明.txt

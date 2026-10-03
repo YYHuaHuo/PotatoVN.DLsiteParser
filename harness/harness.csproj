@@ -35,6 +35,7 @@
     <!-- 与插件 csproj 保持同一套：基库 + 同一个 WindowsAppSDK / AngleSharp 版本 -->
     <ProjectReference Include="..\..\PotatoVN\GalgameManager.WinApp.Base\GalgameManager.WinApp.Base.csproj" />
     <PackageReference Include="AngleSharp" Version="1.8.2" />
+    <PackageReference Include="Lib.Harmony" Version="2.4.2" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.1.3" />
   </ItemGroup>
 
@@ -43,6 +44,7 @@
     <Compile Include="..\DLsitePhraser.cs" />
     <Compile Include="..\DLsiteWork.cs" />
     <Compile Include="..\Plugin.cs" />
+    <Compile Include="..\SearchLinkPatch.cs" />
   </ItemGroup>
 
 </Project>
